@@ -1,0 +1,51 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+<head>
+    <style>
+        .box-element{
+            box-shadow:hsl(0, 0%, 80%) 0 0 16px;
+            background-color: #fff;
+            border-radius: 4px;
+            padding: 10px;
+        }
+    </style>
+</head>
+{% if messages %}
+<div class="pt-3">
+<div class="alert alert-danger" role="alert">
+    {% for message in messages %}
+        {{ message }}
+    {% endfor %}
+    
+</div>
+</div>
+{% endif %}
+<div class="row" style="padding-top:30px;
+                        padding-bottom:30px;">
+    {% for product in products  %}
+    
+    
+    <div class="col-lg-4" style="padding-top:20px;">
+        <img style="width: 100%;
+        height: 200px;
+        -webkit-box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
+        -moz-box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
+        box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);" src={{product.imgURL}}>
+        <div class="box-element product">
+            <h6><strong>{{product.p_name}}</strong></h6>
+            <hr>
+            <button class="btn btn-warning add-btn update-cart" data-product="{{product.id}}" data-action="add" >Add to Cart</button>
+            <a class="btn btn-success" href="{% url 'pview' product.id %}">View</a>
+			<h4 style="display: inline-block; float: right"><strong>₹ {{product.price | floatformat:2}}</strong></h4>
+        </div>
+    </div>
+    {% endfor %}
+    
+
+</div>
+    
+
+
+{% endblock  %}
+
